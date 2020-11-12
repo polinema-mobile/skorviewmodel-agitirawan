@@ -25,6 +25,7 @@ public class ScoreViewModel extends ViewModel {
     public int getAwayScore() {
         return awayGoalScorerList.getValue().size();
     }
+
     public void setGoalScorer(String team, GoalScorer goalScorer) {
         if (team.equals(ScoreFragment.HOME)) {
             homeGoalScorerList.getValue().add(goalScorer);
@@ -32,6 +33,7 @@ public class ScoreViewModel extends ViewModel {
             awayGoalScorerList.getValue().add(goalScorer);
         }
     }
+
     public void onAddHomeClick(View view) {
         ScoreFragmentDirections.GoalScorerAction action;
         action = ScoreFragmentDirections.goalScorerAction(ScoreFragment.HOME);
@@ -43,6 +45,27 @@ public class ScoreViewModel extends ViewModel {
                 ScoreFragmentDirections.goalScorerAction(ScoreFragment.AWAY);
         Navigation.findNavController(view).navigate(action);
     }
-}
 
+    public String getHomeScorer() {
+        StringBuilder result = new StringBuilder();
+        for (GoalScorer g : homeGoalScorerList.getValue()) {
+            result.append(g.getName())
+                    .append(" ")
+                    .append(g.getMinute())
+                    .append("\" ");
+        }
+        return result.toString();
+    }
+
+    public String getAwayScorer() {
+        StringBuilder result = new StringBuilder();
+        for (GoalScorer g : awayGoalScorerList.getValue()) {
+            result.append(g.getName())
+                    .append(" ")
+                    .append(g.getMinute())
+                    .append("\" ");
+        }
+        return result.toString();
+    }
+}
 
